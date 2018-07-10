@@ -1,0 +1,50 @@
+311CD
+Puisor Oana-Daniela
+
+	Tema 3 - SD
+
+
+	Pentru rezolvarea acestei teme am folosit algoritmul Kuhn,iar pasii 
+algoritmului i-am tratat in functii diferite.Solutia a consat in 
+scaderea ,atat pe linii cat si pe coloane pana la intalnirea de 
+zero-uri,urmand etapele de rezolvare.
+
+	Mai intai am avut nevoie de aflarea unui minorant pentru fiecare 
+linie a matricei.In continuare am scazut minorantul din fiecare 
+linie si am obtinut zero-uri pe fiecare linie.In cazul in care 
+nu exista nici un zero pe nicio coloana,atunci aflam minorantul 
+pentru coloanele fara zero si apoi il scadeam din fiecare element
+ al coloanei.De aceasta procedura se va ocupa functiile lower_bound
+ ,pentru aflarea minorantilor si substract_lower_bound pentru 
+ scaderea lor,ambele incluse in functia do_step_2.
+
+	Primul pas al algoritmului a fost indeplinit,deci am trecut la 
+urmatorul,care a presupus bararea si incadrarea de zero-uri.Pentru
+inceput,m-am folosit de o copie a matricei originale pentru a marca
+ce este diferit de 0 fata de elementele nule din matricea data ca
+input.In matricea copie(support) am marcat elementele diferite de
+0 cu -1.In continuare am cautat cate un 0 pe fiecare linie,iar 
+primul zero gasit l-am marcat in matricea suport cu 2.
+	Am mai tratat si un caz de exceptie,respectiv matricea de la 
+testul 5 in care mai ramanea o linie fara zero incadrat.Pentru
+acest caz am mai facut si urmatorii pasi ai algoritmului.
+
+	Mai intai am alocat 2 vectori cu dimensiunea graph->nn
+ pentru marcarea liniilor sa a coloanelor separat.
+	Prima marcare va fi pentru liniile care nu 
+contin niciun zero incadrat(am marcat cu 1 in marked_lines),sau cu cu
+alte cuvinte, se marcheazaliniile care nu contin in matricea support niciun 1.
+	Urmatoarea marcare este pentru coloanele care contin zero-uri taiate pe liniile
+deja marcate.In final marchez si liniile care contin un zero incadrat
+pe coloanele deja marcate.Incluzand in cei doi vectori marcarile,pot
+efectua astfel scaderile si adunarile corespunzatoare,pentru a forma
+noi elemente nule.In continuare procedez ca la primii pasi ai 
+algoritmului:aflu minorantul elementelor ramase netaiate si pentru
+linii si pentru coloane.In acelasi timp prelucrez si matricea originala
+graph.
+	Dupa ce am aflat minorantul nu mai ramane decat sa il adun 
+elementelor dublu taiate(vectorul linie trebuie sa fie 0 iar cel 
+coloana 1).Pentru elementele netaiate se scade(vectorul linie trebuie
+sa fie 1 iar cel coloana 0).Pentru elementele simplu taiate nu se 
+efectueaza nicio operatie.In final obtin noi elemente nule ce vor 
+reprezenta combinatia optima de drumuri,iar costul final va fi minim.
